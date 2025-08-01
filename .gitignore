@@ -132,3 +132,9 @@ Thumbs.db
 
 # Render deploy has its own repository
 render_deploy/
+
+# Dataset files (too large for GitHub)
+dataset/
+
+# Large dataset files (too large for GitHub)
+dataset/raw_data/*.csv
