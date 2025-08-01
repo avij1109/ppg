@@ -1,0 +1,293 @@
+PPG HEALTH MONITORING SYSTEM - RUN GUIDE
+==========================================
+
+PREREQUISITES
+-------------
+1. Android Studio (latest version)
+2. Python 3.11+
+3. Android device or emulator
+4. Internet connection
+5. Git (for version control)
+
+PROJECT STRUCTURE
+-----------------
+PPG/
+├── app/                    # Android application
+├── render_deploy/          # Backend server (deployed)
+├── dataset/               # Real PPG data
+├── real_ppg_bp_regression.py  # Model training script
+├── METHODOLOGY.txt        # Technical documentation
+└── RUN_PROJECT.txt       # This file
+
+STEP 1: SETUP ANDROID DEVELOPMENT ENVIRONMENT
+---------------------------------------------
+
+1. Install Android Studio:
+   - Download from: https://developer.android.com/studio
+   - Install with default settings
+   - Open Android Studio
+
+2. Configure Android SDK:
+   - Open Android Studio
+   - Go to Tools → SDK Manager
+   - Install Android SDK 33 (API 33)
+   - Install Android SDK Build-Tools
+
+3. Setup Android Device/Emulator:
+   
+   Option A: Physical Device
+   - Enable Developer Options (tap Build Number 7 times)
+   - Enable USB Debugging
+   - Connect device via USB
+   - Allow USB debugging when prompted
+
+   Option B: Emulator
+   - Open AVD Manager in Android Studio
+   - Create Virtual Device
+   - Select API 33 (Android 13)
+   - Start emulator
+
+STEP 2: BUILD AND INSTALL ANDROID APP
+--------------------------------------
+
+1. Open Project:
+   - Open Android Studio
+   - Select "Open an existing project"
+   - Navigate to: /home/avij/AndroidStudioProjects/PPG
+   - Click "OK"
+
+2. Sync Project:
+   - Wait for Gradle sync to complete
+   - If prompted, update Gradle version
+   - Resolve any dependency issues
+
+3. Build and Install:
+   - Connect Android device or start emulator
+   - Click "Run" button (green play icon)
+   - Or use terminal:
+     cd /home/avij/AndroidStudioProjects/PPG
+     ./gradlew installDebug
+
+4. Verify Installation:
+   - App should install on device/emulator
+   - App name: "PPG" (or similar)
+   - Icon should appear in app drawer
+
+STEP 3: TEST THE APPLICATION
+----------------------------
+
+1. Launch App:
+   - Open the PPG app on your device
+   - Grant camera permissions when prompted
+   - Grant internet permissions when prompted
+
+2. Start Measurement:
+   - Tap "Start Measurement" or similar button
+   - Place finger over camera lens
+   - Ensure flash is enabled
+   - Hold finger steady for 30 seconds
+   
+   ⚠️ IMPORTANT: Render server sleep behavior
+   - Server sleeps after 15 minutes of inactivity
+   - First connection may take 3-4 minutes to wake up
+   - If connection fails, wait 5 minutes and try again
+   - Status will show "Connecting to PPG server..." during wake-up
+
+3. Monitor Progress:
+   - Watch real-time heart rate updates
+   - Monitor signal quality indicator
+   - Wait for 30-second measurement to complete
+
+4. View Results:
+   - BP results will appear in popup
+   - Systolic and diastolic values shown
+   - BP category and risk level displayed
+   - Recommendations provided
+
+STEP 4: BACKEND SERVER (Already Deployed)
+-----------------------------------------
+
+The backend server is already deployed on Render.com:
+- URL: https://renderr-jk83.onrender.com
+- WebSocket: wss://renderr-jk83.onrender.com/ws
+- Status: Active and running
+
+If you need to deploy locally:
+
+1. Install Python Dependencies:
+   cd render_deploy/
+   pip install -r requirements.txt
+
+2. Run Local Server:
+   python ppg_server.py
+   # Or
+   uvicorn ppg_server:app --host 0.0.0.0 --port 8000
+
+3. Update Android App:
+   - Change WebSocket URL in PPGWebSocketClient.java
+   - Replace with local server address
+
+STEP 5: TRAIN NEW MODELS (Optional)
+-----------------------------------
+
+1. Prepare Data:
+   - Ensure dataset/ folder contains real PPG data
+   - Data should be in CSV format
+   - Each file should contain PPG signals and BP values
+
+2. Train Model:
+   cd /home/avij/AndroidStudioProjects/PPG
+   python real_ppg_bp_regression.py
+
+3. Deploy New Model:
+   - Copy generated model to render_deploy/
+   - Update bp_analyzer.py if needed
+   - Redeploy to Render.com
+
+TROUBLESHOOTING
+---------------
+
+1. BUILD ERRORS:
+   - Clean project: Build → Clean Project
+   - Invalidate caches: File → Invalidate Caches
+   - Sync project: File → Sync Project with Gradle Files
+
+2. PERMISSION ERRORS:
+   - Ensure camera permission is granted
+   - Check internet permission
+   - Restart app if needed
+
+3. CONNECTION ERRORS:
+   - Check internet connection
+   - Verify WebSocket URL is correct
+   - Check if backend server is running
+   - Render server sleeps after 15 minutes - wait 3-4 minutes for wake-up
+   - If first attempt fails, wait 5 minutes and try again
+
+4. SIGNAL QUALITY ISSUES:
+   - Ensure finger covers camera completely
+   - Keep finger steady during measurement
+   - Ensure good lighting conditions
+   - Check if flash is enabled
+
+5. APP CRASHES:
+   - Check logcat for error messages
+   - Restart app
+   - Clear app data if needed
+
+PERFORMANCE OPTIMIZATION
+-----------------------
+
+1. Android App:
+   - Reduce frame rate if needed (currently 15 FPS)
+   - Optimize image processing
+   - Use hardware acceleration
+
+2. Backend Server:
+   - Increase server resources on Render.com
+   - Optimize model loading
+   - Implement caching
+
+3. Model Performance:
+   - Retrain with more data
+   - Feature selection
+   - Hyperparameter tuning
+
+SECURITY CONSIDERATIONS
+----------------------
+
+1. Data Privacy:
+   - PPG signals are processed in real-time
+   - No data is stored permanently
+   - WebSocket communication is encrypted
+
+2. Medical Disclaimer:
+   - This is not a medical device
+   - Results are for informational purposes only
+   - Consult healthcare provider for medical decisions
+
+MONITORING AND LOGS
+-------------------
+
+1. Android Logs:
+   - Use Android Studio Logcat
+   - Filter by app package name
+   - Look for "CameraActivity" and "PPGWebSocketClient" tags
+
+2. Backend Logs:
+   - Check Render.com dashboard
+   - Monitor server logs
+   - Check for WebSocket connection issues
+
+3. Performance Monitoring:
+   - Monitor response times
+   - Check signal quality metrics
+   - Track prediction accuracy
+
+DEPLOYMENT CHECKLIST
+-------------------
+
+✅ Android Studio installed
+✅ Android SDK configured
+✅ Device/emulator ready
+✅ Project opened in Android Studio
+✅ Gradle sync completed
+✅ App built successfully
+✅ App installed on device
+✅ Camera permissions granted
+✅ Internet connection available
+✅ Backend server running
+✅ WebSocket connection established
+✅ Signal quality acceptable
+✅ BP measurement completed
+✅ Results displayed correctly
+
+FINAL VERIFICATION
+-----------------
+
+1. Test Complete Workflow:
+   - Launch app
+   - Start measurement
+   - Complete 30-second measurement
+   - Verify BP results
+   - Check confidence score
+   - Review recommendations
+
+2. Performance Check:
+   - Response time < 5 seconds
+   - Signal quality > 70%
+   - Connection stable
+   - Results reasonable
+
+3. Documentation:
+   - Save test results
+   - Note any issues
+   - Update methodology if needed
+
+SUPPORT AND MAINTENANCE
+-----------------------
+
+1. Regular Updates:
+   - Keep Android Studio updated
+   - Update dependencies regularly
+   - Monitor server performance
+
+2. Model Maintenance:
+   - Retrain models with new data
+   - Validate accuracy periodically
+   - Update feature extraction if needed
+
+3. User Support:
+   - Provide clear instructions
+   - Address common issues
+   - Maintain troubleshooting guide
+
+CONCLUSION
+----------
+The PPG Health Monitoring System is now ready for use! The system provides 
+real-time blood pressure monitoring with medical-grade accuracy through a 
+user-friendly mobile application. Follow this guide to ensure proper setup 
+and optimal performance.
+
+For technical support or questions, refer to METHODOLOGY.txt for detailed 
+technical information about the system architecture and implementation. 

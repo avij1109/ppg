@@ -1,0 +1,46 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Heart Monitor Background Circle -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,54m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0"/>
+    
+    <!-- Heart Symbol -->
+    <path
+        android:fillColor="#FF5722"
+        android:pathData="M54,30c-2.5,-5.5 -8.5,-8.5 -13.5,-6.5c-5,2 -7.5,7.5 -5.5,12.5c2,5 8,12 13,18c5,-6 11,-13 13,-18c2,-5 -0.5,-10.5 -5.5,-12.5c-5,-2 -11,1 -6.5,6.5z"/>
+    
+    <!-- Heart Rate Line -->
+    <path
+        android:strokeColor="#4CAF50"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M25,65 L35,60 L45,70 L55,55 L65,65 L75,50 L85,60"/>
+    
+    <!-- Pulse Dots -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M25,65m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M35,60m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M45,70m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M55,55m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M65,65m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M75,50m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M85,60m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+</vector>

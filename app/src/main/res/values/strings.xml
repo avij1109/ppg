@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PPG</string>
+    <string name="ppg_title">PPG Heart Rate Monitor</string>
+    <string name="ppg_instructions">Place your finger on the camera lens and press start to begin PPG analysis</string>
+    <string name="start_analysis">Start Analysis</string>
+    <string name="analysis_started">Analysis Started</string>
+    <string name="ppg_analysis_starting">PPG Analysis Starting...</string>
+    <string name="camera_permission_required">Camera permission is required for PPG analysis</string>
+    <string name="flash_enabled">Flash enabled for PPG analysis</string>
+    <string name="flash_not_available">Flash not available on this device</string>
+    <string name="connected_to_ppg_backend">Connected to PPG backend</string>
+    <string name="connected_to_ppg_server">Connected to PPG Server\nReady to analyze...</string>
+    <string name="ppg_analysis_result">PPG Analysis Result:\n%1$s\nFrames sent: %2$d</string>
+    <string name="ppg_signal_received">PPG Signal received\nFrames sent: %1$d</string>
+    <string name="disconnected_from_server">Disconnected from server</string>
+    <string name="connection_error">Connection error: %1$s</string>
+    <string name="failed_to_start_camera">Failed to start camera</string>
+    <string name="error_starting_camera">Error starting camera</string>
+    <string name="status_connected">Status: %1$s\nFrames sent: %2$d\nPlace finger on camera lens</string>
+</resources>
